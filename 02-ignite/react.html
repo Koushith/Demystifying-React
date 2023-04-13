@@ -9,21 +9,6 @@
   <body>
     <div id="root">//content will be injected here</div>
 
-    <script
-      crossorigin=""
-      src="https://unpkg.com/react@18/umd/react.development.js"
-    ></script>
-    <script
-      crossorigin=""
-      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
-    ></script>
-
-    <script>
-      const element = React.createElement("h2", {}, "Hello from React");
-
-      const root = ReactDOM.createRoot(document.getElementById("root"));
-
-      root.render(element);
-    </script>
+    <script src="./index.js" type="module"></script>
   </body>
 </html>
