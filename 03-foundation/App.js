@@ -20,8 +20,12 @@ const Heading = () => (
 console.log("heading", Heading);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+const test = ReactDOM.createRoot(document.getElementById("test"));
 
 root.render(<Heading />);
 
 root.render(jsxHeading);
 root.render(<Heading />);
+
+test.render(jsxHeading);
+test.render(<Heading />);
