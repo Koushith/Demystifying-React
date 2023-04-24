@@ -178,3 +178,33 @@ nav > ul {
   border-top: 1px solid #e9e9eb;
   color: #5d8ed5;
 }
+
+/* tabs- filter */
+
+.filter-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 2.4rem;
+}
+
+.filter-container .result-count {
+  font-size: 1.8rem;
+  color: #282c3f;
+  font-weight: 600;
+  line-height: 34px;
+}
+
+.filter-container .filter-options {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 2rem;
+  font-size: 1.6rem;
+  font-weight: 300;
+  color: #3d4152;
+}
+
+.filter-options > li {
+  cursor: pointer;
+}

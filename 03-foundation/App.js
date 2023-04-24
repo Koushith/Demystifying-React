@@ -10,8 +10,8 @@ console.log("jsx heading", jsxHeading);
 
 const Heading = () => (
   <>
-    <h1>This is a heading</h1>
-    <h1>This is a heading</h1>
+    {/* <h1>This is a heading</h1>
+    <h1>This is a heading</h1> */}
     {2 + 2}
     {console.log("helooooooooooooooooooooooooooooooooooo")}
   </>
