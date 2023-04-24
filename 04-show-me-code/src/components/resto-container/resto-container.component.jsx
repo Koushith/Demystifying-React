@@ -6,19 +6,39 @@ export const RestoContainer = () => {
   const filterByRating = (option, allList) => {
     console.log("filter inside", option);
     console.log("all list", allList);
+
+    // fix later
     const filteredList = restoList.filter((item) => item.data.avgRating >= 4.3);
     setRestoList(filteredList);
 
-    // setFilterOptions([...allList, ])
+    //find one and update is selected to true
+
+    const updatedList = allList.map((opt) => {
+      if (opt.id === option.id) {
+        return { ...opt, isSelected: true };
+      }
+      return { ...opt, isSelected: false };
+    });
+
+    setFilterOptions(updatedList);
   };
 
-  const sortByDeliveryTime = (option) => {
+  const sortByDeliveryTime = (option, allList) => {
     console.log("del id", option);
     const sortedByAsec = restoList.sort(
       (a, b) => a.data.costForTwo < b.data.costForTwo
     );
 
     setRestoList(sortedByAsec);
+
+    const updatedList = allList.map((opt) => {
+      if (opt.id === option.id) {
+        return { ...opt, isSelected: true };
+      }
+      return { ...opt, isSelected: false };
+    });
+
+    setFilterOptions(updatedList);
   };
 
   const resetFilters = (option) => {
@@ -48,7 +68,7 @@ export const RestoContainer = () => {
     },
   ]);
 
-  // console.log("fillllllll option- from out", filterOptions);
+  console.log("fillllllll option- from out", filterOptions);
   return (
     <>
       {/* filter tab */}
@@ -60,9 +80,9 @@ export const RestoContainer = () => {
             <li
               onClick={() => op.onClickCb(op, filterOptions)}
               key={op.id}
-              // style={{
-              //   borderBottom: op.isSelected ? "1px solid red" : "none",
-              // }}
+              style={{
+                borderBottom: op.isSelected ? "1px solid #686b78" : "none",
+              }}
             >
               {op.type}
             </li>
