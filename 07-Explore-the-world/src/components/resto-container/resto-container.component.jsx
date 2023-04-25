@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { resList } from "../../utils/mock-data";
 import { Card } from "../card/card.component";
+import { SWIGGYBASE } from "../../utils/constants";
+import { resResults } from "../../utils/mock-api";
 
 export const RestoContainer = () => {
   const filterByRating = (option, allList) => {
@@ -49,8 +51,8 @@ export const RestoContainer = () => {
   };
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredRes, setFilteredRes] = useState(resList);
-  const [restoList, setRestoList] = useState(resList);
+  const [filteredRes, setFilteredRes] = useState([]);
+  const [restoList, setRestoList] = useState([]);
   const [filterOptions, setFilterOptions] = useState([
     {
       type: "Delivery Time",
@@ -74,9 +76,8 @@ export const RestoContainer = () => {
 
   // search
 
-  const searchHandler = (e) => {
+  const searchFilter = (e) => {
     // console.log(e.target.value);
-    setSearchTerm(e.target.value.toLowerCase());
 
     const queryRes = restoList.filter((list) =>
       list.data.name.toLocaleLowerCase().includes(searchTerm)
@@ -87,9 +88,20 @@ export const RestoContainer = () => {
 
   // console.log(searchTerm);
 
+  const fetchallRestoInfo = async () => {
+    const res = await resResults();
+
+    setFilteredRes(res);
+    setRestoList(res);
+  };
+
   useEffect(() => {
-    // searchHandler();
-  }, [searchTerm]);
+    fetchallRestoInfo();
+  }, []);
+
+  useEffect(() => {
+    searchFilter();
+  }, [searchTerm, resList]);
 
   return (
     <>
@@ -100,7 +112,7 @@ export const RestoContainer = () => {
         <input
           type="search"
           style={{ height: 40, width: 250 }}
-          onChange={searchHandler}
+          onChange={(e) => setSearchTerm(e.target.value.toLowerCase())}
           value={searchTerm}
         />
       </div>
@@ -124,6 +136,8 @@ export const RestoContainer = () => {
 
       <div className="resto-container">
         {/* cards */}
+
+        {filteredRes.length <= 0 && <h1>Loadingg</h1>}
 
         {filteredRes.map((res) => (
           <Card resList={res} key={res.data.id} />
