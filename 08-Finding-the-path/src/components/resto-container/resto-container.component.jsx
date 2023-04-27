@@ -4,47 +4,8 @@ import { Card } from "../card/card.component";
 import { resResults } from "../../utils/mock-api";
 import { swiggy_api_URL } from "../../utils/constants.js";
 import { Shimmer } from "../shimmer/shimmer.component";
+
 export const RestoContainer = () => {
-  const filterByRating = (option, allList) => {
-    console.log("filter inside", option);
-    console.log("all list", allList);
-
-    // fix later
-    const filteredList = restoList.filter((item) => item.data.avgRating >= 4.3);
-    setRestoList(filteredList);
-
-    //find one and update is selected to true
-
-    const updatedList = allList.map((opt) => {
-      if (opt.id === option.id) {
-        return { ...opt, isSelected: true };
-      }
-      return { ...opt, isSelected: false };
-    });
-
-    setFilterOptions(updatedList);
-  };
-
-  const sortByDeliveryTime = (option, allList) => {
-    console.log("del id", option);
-
-    // todo- not working- fix kater
-    const sortedByAsec = restoList.sort(
-      (a, b) => b.data.deliveryTime - a.data.deliveryTime
-    );
-
-    setRestoList(sortedByAsec);
-
-    const updatedList = allList.map((opt) => {
-      if (opt.id === option.id) {
-        return { ...opt, isSelected: true };
-      }
-      return { ...opt, isSelected: false };
-    });
-
-    setFilterOptions(updatedList);
-  };
-
   const resetFilters = (option) => {
     console.log("reset id", option);
     setRestoList(resList);
@@ -57,19 +18,19 @@ export const RestoContainer = () => {
     {
       type: "Delivery Time",
       id: 1,
-      onClickCb: sortByDeliveryTime,
+      // onClickCb: sortByDeliveryTime,
       isSelected: false,
     },
     {
       type: "Ratings",
       id: 2,
-      onClickCb: filterByRating,
+      // onClickCb: filterByRating,
       isSelected: false,
     },
     {
       type: "Reset Filters",
       id: 3,
-      onClickCb: resetFilters,
+      // onClickCb: resetFilters,
       isSelected: false,
     },
   ]);
@@ -80,7 +41,7 @@ export const RestoContainer = () => {
     // console.log(e.target.value);
 
     const queryRes = restoList.filter((list) =>
-      list.data.name.toLocaleLowerCase().includes(searchTerm)
+      list.name.toLocaleLowerCase().includes(searchTerm)
     );
 
     setFilteredRes(queryRes);
@@ -96,6 +57,7 @@ export const RestoContainer = () => {
       // const json = await data.json();
       // setFilteredRes(json?.data?.cards[2]?.data?.data?.cards);
       // setRestoList(json?.data?.cards[2]?.data?.data?.cards);
+      console.log("ressss", res);
       setFilteredRes(res);
       setRestoList(res);
     } catch (error) {
@@ -132,7 +94,7 @@ export const RestoContainer = () => {
         <ul className="filter-options">
           {filterOptions.map((op) => (
             <li
-              onClick={() => op.onClickCb(op, filterOptions)}
+              // onClick={() => op.onClickCb(op, filterOptions)}
               key={op.id}
               style={{
                 borderBottom: op.isSelected ? "2px solid #686b78" : "none",
@@ -150,7 +112,7 @@ export const RestoContainer = () => {
         {filteredRes.length <= 0 && <Shimmer />}
 
         {filteredRes.map((res) => (
-          <Card resList={res} key={res.data.id} />
+          <Card resList={res} key={res.id} />
         ))}
       </div>
     </>
