@@ -1951,7 +1951,7 @@ export const restaurants = [
     ],
   },
   {
-    name: "Mexican Grill",
+    name: "Mexican Grill.",
     id: 4,
     cuisines: ["Mexican"],
     ratings: 4.0,
