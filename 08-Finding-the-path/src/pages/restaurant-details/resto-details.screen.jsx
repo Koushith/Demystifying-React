@@ -10,8 +10,6 @@ export const RestroDetailsScreen = () => {
   useEffect(() => {
     const res = restaurants.find((res) => res.id === parseInt(id));
 
-    console.log(res);
-
     setRestaurant(res);
   }, []);
 
