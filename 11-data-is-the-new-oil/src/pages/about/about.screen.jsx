@@ -81,7 +81,9 @@ export const AboutScreen = () => {
         title="Join"
         description="Join Swiggy and be a part of our team..."
         isVisible={visibleSection === "Join"}
-        setIsVisible={() => setVisibleSection("Join")}
+        setIsVisible={() =>
+          setVisibleSection(visibleSection === "Join" ? "" : "Join")
+        }
       />
 
       <Section
