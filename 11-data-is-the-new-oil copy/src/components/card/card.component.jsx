@@ -1,10 +1,9 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const Card = (props) => {
   const { resList } = props;
-  console.log(resList);
   const { name, cuisines, avgDeliveryTime, cost, ratings, image, id } = resList;
-  console.log("name", name);
+
   const navigate = useNavigate();
   return (
     <div className="res-card">
@@ -16,9 +15,9 @@ export const Card = (props) => {
         <span>{avgDeliveryTime} Min</span>
         <span>{cost * 2} Rs</span>
       </div>
-      <Link className="quick-view" to={`/restaurant/${id}`}>
+      <div className="quick-view" onClick={() => navigate(`/restaurant/${id}`)}>
         Quick view
-      </Link>
+      </div>
     </div>
   );
 };

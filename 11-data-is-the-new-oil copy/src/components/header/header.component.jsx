@@ -1,9 +1,9 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useAuth } from "../../utils/auth.context";
+import { useAuth } from "../../../context/auth.context";
 
 export const Header = () => {
-  // const { user, setUser } = useAuth();
-  // console.log("header-render............");
+  const { user, setUser } = useAuth();
   return (
     <div className="header">
       <img
@@ -18,16 +18,14 @@ export const Header = () => {
           <Link to="/profile">Profile</Link>
           <Link to="/contact">Contact</Link>
           <Link to="/card">Cart</Link>
-
-          {/* <span>{user.name}</span>
-
+          <span>{user.name}</span>
           <button
             onClick={() =>
-              setUser({ ...user, name: "Koushith", isLoggedIn: true })
+              setUser({ ...user, isLoggedIn: true, name: "koushith" })
             }
           >
             {user.isLoggedIn ? "Logout" : "Login"}
-          </button> */}
+          </button>
         </ul>
       </nav>
     </div>

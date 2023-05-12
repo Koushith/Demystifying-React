@@ -1,22 +1,15 @@
-import React, { lazy, Suspense } from "react";
+import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import { Header } from "./components/header/header.component";
 import { RestoContainer } from "./components/resto-container/resto-container.component";
 import { Footer } from "./components/footer/footer.component";
-
+import { ErrorPage } from "./pages/error-page/error.screen";
+import { AboutScreen } from "./pages/about/about.screen";
+import { ContactScreen } from "./pages/contact/contact.screen";
+import { RestroDetailsScreen } from "./pages/restaurant-details/resto-details.screen";
 import { Home } from "./pages/home/home.screen";
-import { AuthProvider } from "./utils/auth.context";
-
-const About = lazy(() => import("../src/pages/about/about.screen"));
-
-const ErrorPage = lazy(() => import("./pages/error-page/error.screen"));
-
-const Contact = lazy(() => import("./pages/contact/contact.screen"));
-
-const RestroDetails = lazy(() =>
-  import("./components/resto-container/resto-container.component")
-);
+import { AuthProvider } from "../context/auth.context";
 
 export const App = () => {
   return (
@@ -34,7 +27,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    // errorElement: <ErrorPage />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
@@ -42,27 +35,15 @@ const router = createBrowserRouter([
       },
       {
         path: "/about",
-        element: (
-          <Suspense fallback={<h1>Loading</h1>}>
-            <About />
-          </Suspense>
-        ),
+        element: <AboutScreen />,
       },
       {
         path: "/contact",
-        element: (
-          <Suspense fallback={<h1>Loading</h1>}>
-            <Contact />
-          </Suspense>
-        ),
+        element: <ContactScreen />,
       },
       {
         path: "/restaurant/:id",
-        element: (
-          <Suspense fallback={<h1>Loading</h1>}>
-            <RestroDetails />
-          </Suspense>
-        ),
+        element: <RestroDetailsScreen />,
       },
     ],
   },
@@ -72,8 +53,8 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
-    <>
+    <AuthProvider>
       <RouterProvider router={router} />
-    </>
+    </AuthProvider>
   </React.StrictMode>
 );
