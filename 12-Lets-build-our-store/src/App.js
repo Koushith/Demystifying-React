@@ -10,6 +10,9 @@ import { ContactScreen } from "./pages/contact/contact.screen";
 import { RestroDetailsScreen } from "./pages/restaurant-details/resto-details.screen";
 import { Home } from "./pages/home/home.screen";
 import { AuthProvider } from "../context/auth.context";
+import { CartPage } from "./pages/cart/cart.page";
+import { Provider } from "react-redux";
+import { Store } from "./store/store";
 
 export const App = () => {
   return (
@@ -45,6 +48,10 @@ const router = createBrowserRouter([
         path: "/restaurant/:id",
         element: <RestroDetailsScreen />,
       },
+      {
+        path: "/cart",
+        element: <CartPage />,
+      },
     ],
   },
 ]);
@@ -53,8 +60,10 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
-    <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
+    <Provider store={Store}>
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
+    </Provider>
   </React.StrictMode>
 );

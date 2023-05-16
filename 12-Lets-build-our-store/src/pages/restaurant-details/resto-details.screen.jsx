@@ -2,16 +2,23 @@ import { useParams } from "react-router-dom";
 
 import { useEffect, useState } from "react";
 import { restaurants } from "../../utils/mock-data";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../slices/cart.slice";
 
 export const RestroDetailsScreen = () => {
   const [restaurant, setRestaurant] = useState([]);
   const { id } = useParams();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const res = restaurants.find((res) => res.id === parseInt(id));
 
     setRestaurant(res);
   }, []);
+
+  const addToCartHandle = (item) => {
+    dispatch(addToCart(item));
+  };
 
   return (
     <>
@@ -36,6 +43,14 @@ export const RestroDetailsScreen = () => {
                   <h2>{item.price} Rs</h2>
 
                   <h4>{item.rating} stars</h4>
+
+                  <div style={{ fontSize: 18 }}>
+                    <button onClick={() => addToCartHandle(item)}>
+                      Add To Cart
+                    </button>
+                    <span>+</span>
+                    {0} <span>-</span>
+                  </div>
                 </div>
               ))}
             </div>

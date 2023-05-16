@@ -1,9 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../../context/auth.context";
+import { useSelector } from "react-redux";
 
 export const Header = () => {
   const { user, setUser } = useAuth();
+  const cartItems = useSelector((state) => state.cartReducer.items);
+  console.log("cart", cartItems);
+
   return (
     <div className="header">
       <img
@@ -17,7 +21,7 @@ export const Header = () => {
           <Link to="/about">About</Link>
           <Link to="/profile">Profile</Link>
           <Link to="/contact">Contact</Link>
-          <Link to="/card">Cart</Link>
+          <Link to="/cart">Cart -- {cartItems.length} items</Link>
           <span>{user.name}</span>
           <button
             onClick={() =>
